@@ -44,7 +44,6 @@ function onEachFeature(feature, layer) {
 // grab data and plot using functions
 var circles = d3.json(url, function(data) {
   console.log(data.features[0]['geometry']['coordinates'][2]);
-  // createFeatures(data.features);
   L.geoJSON(data, {
     pointToLayer: createCircleMarker,
     onEachFeature: onEachFeature
@@ -55,7 +54,7 @@ var circles = d3.json(url, function(data) {
 })
 
 
-// function that assigns color
+// function that assigns color based on depth
 function getColor(d) {
   return d > 90 ? '#800026' :
          d > 70  ? '#BD0026' :
@@ -84,7 +83,7 @@ return div;
   }
 legend.addTo(myMap);
 
-// locate plates geojson
+// location of plates geojson
 plates = "static/tectonicplates-master/GeoJSON/PB2002_boundaries.json"
 
 // Plate style
@@ -95,7 +94,6 @@ var myStyle = {
 };
 // plot plates data
 d3.json(plates, function(data) {
-  // createFeatures(data.features);
   L.geoJSON(data,{
     style: myStyle
   }).addTo(myMap).bringToBack()
